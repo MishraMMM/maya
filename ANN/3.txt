@@ -1,0 +1,69 @@
+#ANN Assignment 3
+
+import numpy as np
+from numpy import random,dot
+from random import choice
+
+w = [2]
+
+train = np.array([[np.array([38]),1],
+                  [np.array([39]),0],
+                  [np.array([40]),1],
+                  [np.array([91]),0],                             
+                  [np.array([92]),1],   
+                  [np.array([93]),0],                                                                
+                  [np.array([94]),1],                         
+                  [np.array([95]),0],
+                  [np.array([96]),1],
+                  [np.array([97]),0]])
+
+test1 = np.array([25,54,86,77,89,58,65,24,25,36,99,7])
+
+n = 50
+for i in range(n):
+    x,exp = choice(train)
+    res = dot(x,w)
+    err = exp-res
+    w += 0.1*err*x
+    
+for x in test1: 
+    result = dot(x%2,w)
+    print("result:",result)
+    # tmp = unitstep(result)
+    if result>0:
+        print(x,"is odd number\n")
+    else:
+        print(x,"is even numbe\n")
+
+import numpy as np
+from random import choice
+w = [2]
+train = np.array([[np.array([48]),1],
+                  [np.array([49]),0],
+                  [np.array([50]),1],
+                  [np.array([51]),0],
+                  [np.array([52]),1],
+                  [np.array([53]),0],
+                  [np.array([54]),1],
+                  [np.array([55]),0],
+                  [np.array([56]),1],
+                  [np.array([57]),0],
+                  [np.array([58]),1]])
+
+test = np.array([10,85,4,79,65,88,59,63,66,41,25,84,2,9])
+
+n = 50
+for i in range(n):
+  x, exp= choice(train)
+  res = dot(x,w)
+  err = exp-res
+  w += 0.1*err*x
+
+for x in test:
+  result = dot(x%2, w)
+  if result>0:
+    print(x,'is odd number\n')
+
+  else:
+    print(x,'is even number\n')
+

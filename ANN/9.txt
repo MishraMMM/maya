@@ -1,0 +1,52 @@
+#ANN Assignment 9
+
+# Hopfield Nrtwork
+
+import numpy as np
+
+class HopfieldNetwork:
+    def __init__(self, num_neurons):
+        self.num_neurons = num_neurons
+        self.weights = np.zeros((num_neurons, num_neurons))
+        
+    def train(self, patterns):
+        # Calculate the weight matrix
+        for pattern in patterns:
+            self.weights += np.outer(pattern, pattern)
+        np.fill_diagonal(self.weights, 0)
+        
+    def predict(self, input_pattern, num_iterations=100):
+        output_pattern = input_pattern
+        for i in range(num_iterations):
+            # Update the output pattern using the weight matrix
+            output_pattern = np.sign(np.dot(self.weights, output_pattern))
+        return output_pattern
+
+
+
+# Create a Hopfield network with 4 neurons
+hn = HopfieldNetwork(4)
+
+
+# Define your patterns
+patterns = np.array([
+    [1, -1, 1, -1],
+    [-1, 1, -1, 1],
+    [1, 1, -1, -1]
+])
+
+# Train the Hopfield network on your patterns
+hn.train(patterns)
+
+
+
+# python
+# Test the Hopfield network on a new input pattern
+input_pattern = np.array([-1, 1, -1, -1])
+output_pattern = hn.predict(input_pattern)
+print(output_pattern)
+
+
+
+
+
